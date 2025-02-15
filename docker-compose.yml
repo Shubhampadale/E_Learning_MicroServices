@@ -1,0 +1,43 @@
+#mysql,phpmyadmin,postgress,pgadmin,mongo and mongo-express
+
+#below version specifies which version of docker file is
+#version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-container  #this is the name when container is running
+    environment:                      #Now define environment variables
+      MYSQL_ROOT_PASSWORD : admin
+      MYSQL_DATABASE : categorydb
+      MYSQL_USER : user
+      MYSQL_PASSWORD : user123
+    ports:
+
+      - "3307:3306"  
+      # the left side port is the local system port in used and right side port is the container port.
+      # here we have define the mapping of local system port with container port
+      # so whenever we required the mysql db then 3307 port should be in used.
+      # now for data(let say you created 4 tables) which will create at the container only.
+      # so now when container stop the data will also vanish
+      # to avoid this we have to do data volumes mapping as well
+    volumes:
+      - ./mysql-data:/var/lib/mysql   
+      #here in the current MicroServices directory at local system, mysql-data folder will be created
+      #and all the data from var/lib/mysql will be showed under mysql-data
+      # right side is the container path
+
+ # this is used for DB cliet/UI of mysql
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql-db   #using this DB host will be define
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "8081:80" 
+    depends_on:    #this basically tells that phpmyadmin depends on the mysql-db service.
+    #when mysql starts then only phpmyadmin will run 
+      - mysql-db
+
+     
