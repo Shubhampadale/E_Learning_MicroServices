@@ -18,16 +18,9 @@ public class CategoryController {
 
     private CategoryService categoryService;
 
-
-
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
-
-
-
-
-
 
 //category: create
 
@@ -40,7 +33,7 @@ public class CategoryController {
         //if(bindingResult.hasErrors()){
         //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Invalid Data);
         //}
-        CategoryDto categoryDto1 =    categoryService.insert(categoryDto);
+        CategoryDto categoryDto1 =  categoryService.insert(categoryDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryDto1);
     }
 

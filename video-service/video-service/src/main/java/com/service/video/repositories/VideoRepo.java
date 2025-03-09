@@ -3,6 +3,7 @@ package com.service.video.repositories;
 import com.service.video.documents.Video;
 import com.service.video.dto.VideoDto;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.service.video.exception;
 
-import com.service.category.dto.CustomMessage;
+import com.service.video.dto.CustomMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

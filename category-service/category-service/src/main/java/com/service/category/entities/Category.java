@@ -31,4 +31,6 @@ public class Category {
 
     @Column(name="banner_url")
     private String bannerUrl;
+
+    private String test;
 }

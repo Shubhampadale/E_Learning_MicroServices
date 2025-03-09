@@ -18,5 +18,5 @@ public class AppConstants {
 
     public static final String ROLE_GUEST = "ROLE_GUEST";
 
-    public static final String CATEGORY_SERVICE_BASE_URL="http://localhost:9091/api/v1";
+    public static final String CATEGORY_SERVICE_BASE_URL="http://category-service/api/v1";
 }

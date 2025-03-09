@@ -27,7 +27,7 @@ services:
       #and all the data from var/lib/mysql will be showed under mysql-data
       # right side is the container path
 
- # this is used for DB cliet/UI of mysql
+ # php my admin service this is used for DB cliet/UI of mysql
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: phpmyadmin
@@ -40,4 +40,52 @@ services:
     #when mysql starts then only phpmyadmin will run 
       - mysql-db
 
-     
+    # PostgreSQL Service
+  postgres-db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user123
+      POSTGRES_DB: coursedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  # pgAdmin for PostgreSQL
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8082:80"
+    depends_on:
+      - postgres-db
+
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+  # Mongo Express for MongoDB
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8083:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+        # MONGO_INITDB_DATABASE: videodb
+    depends_on:
+        - mongo
+volumes:
+  mysql-data:
+  postgres-data:
+  mongo-data:

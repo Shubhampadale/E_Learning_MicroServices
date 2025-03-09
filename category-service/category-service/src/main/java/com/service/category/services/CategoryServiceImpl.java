@@ -5,6 +5,7 @@ import com.service.category.dto.CustomPageResponse;
 import com.service.category.entities.Category;
 import com.service.category.exception.ResourceNotFoundException;
 import com.service.category.repositories.CategoryRepo;
+import org.apache.commons.lang.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -71,12 +72,8 @@ public class CategoryServiceImpl implements CategoryService{
 
     }
 
-
-
-
-
-        @Override
-        public CategoryDto get(String categoryId) {
+    @Override
+    public CategoryDto get(String categoryId) {
 
         Category category = categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category not found!!"));
 

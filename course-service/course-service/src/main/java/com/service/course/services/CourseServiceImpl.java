@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
 
     private RestTemplate restTemplate;
 
-    private WebClient webClient;
+    private WebClient.Builder webClient;
 
 
     private FileService fileService;
@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
     //Auto Dependency Injection will happened..
 
 
-    public CourseServiceImpl(CourseRepo courseRepo, ModelMapper modelMapper, RestTemplate restTemplate, FileService fileService, WebClient webClient) {
+    public CourseServiceImpl(CourseRepo courseRepo, ModelMapper modelMapper, RestTemplate restTemplate, FileService fileService, WebClient.Builder webClient) {
         this.courseRepo = courseRepo;
         this.modelMapper = modelMapper;
         this.restTemplate = restTemplate;
@@ -234,7 +234,7 @@ public class CourseServiceImpl implements CourseService {
     //call video service to get the videos of the current course....
     public List<VideoDto> getVideosOfCourse(String courseId){
 
-        List<VideoDto> videoDtoList = webClient.get()
+        List<VideoDto> videoDtoList = webClient.build().get()
                 .uri(AppConstants.VIDEO_SERVICE_BASE_URL+"/videos/course/{courseId}",courseId)
                 .retrieve()
                 .bodyToFlux(VideoDto.class)

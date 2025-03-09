@@ -1,4 +1,4 @@
-package com.service.course.dto;
+package com.service.video.dto;
 
 import lombok.Data;
 import lombok.Getter;

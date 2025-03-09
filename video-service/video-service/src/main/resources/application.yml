@@ -11,5 +11,22 @@ spring:
       port: 27017
       database: videodb  #create/register this db at MongoDB front end
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "video-service"
+    description: "This is video service"
 
